@@ -12,7 +12,7 @@ ENV TITLE=Chromium
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
-    chromium && \
+    chromium npm && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*
@@ -20,7 +20,14 @@ RUN \
 # add local files
 COPY /root /
 
+WORKDIR /defaults/proxy
+
+RUN npm install http-proxy --save
+
+CMD [ "node", "proxy.js" ]
+
 # ports and volumes
 EXPOSE 3000
+EXPOSE 9222
 
 VOLUME /config

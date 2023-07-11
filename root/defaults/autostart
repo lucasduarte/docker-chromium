@@ -1,2 +1,2 @@
 #!/bin/bash
-chromium-browser ${CHROME_CLI}
+chromium-browser --remote-debugging-address=0.0.0.0 --remote-debugging-port=9111 ${CHROME_CLI}
